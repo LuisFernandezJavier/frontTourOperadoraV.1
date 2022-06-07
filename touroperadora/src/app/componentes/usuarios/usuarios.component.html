@@ -1,0 +1,76 @@
+<app-header></app-header> <!-- Header -->
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-sm-4 mt-5 mb-5">
+            <div class="card">
+                <div class="card-body ">
+                    <form class="" [formGroup]=" nuevoUsuarioForms ">
+                        <h5 class="mb-4 mt-2"><b>CREAR USUARIO</b></h5>
+                        <label><b>Nombre</b></label>
+                        <input type="text" class=" form-control " style="margin-bottom: 3%; "
+                            formControlName="nombreUsuario" placeholder="Nombre de usuario ">
+                        <label><b>Email</b></label>
+                        <input type="text" class=" form-control " style="margin-bottom: 3%; "
+                            formControlName="emailUsuario" placeholder=" Email ">
+                        <label><b>Pass</b></label>
+                        <input type="password" class=" form-control " style="margin-bottom: 3%; "
+                            formControlName="passUsuario" placeholder=" Contraseña ">
+                        <label><b>Repite pass</b></label>
+                        <input type="password" class=" form-control " style="margin-bottom: 2%; "
+                            formControlName="passUsuario2" placeholder=" Repite la contraseña ">
+
+                        <label><b>Rol</b></label>
+                        <select class="form-select  mb-3 " formControlName="role" placeholder="Rol">
+
+                            <option value="user">Usuario</option>
+                            <option value="admin">Administrador</option>
+
+                        </select>
+
+                        <div class="alert alert-danger mb-2" *ngIf="errorPass">
+                            <span class="error"> Contraseñas no <strong>coinciden</strong> !! </span>
+                        </div>
+
+                        <button type="submit " class="btn btn-warning float-start" data-bs-dismiss="modal"
+                            [routerLink]="['']">Cancelar</button>
+
+                        <button type="submit " class="btn btn-warning " style="display: block; margin-left: auto; "
+                            [disabled]="nuevoUsuarioForms.invalid " (click)="creoUsuario()">Guardar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8 mt-5">
+            <table class="table ">
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Roles</th>
+                        <th scope="col">Opciones</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let usuario of arrayUsuarios">
+                        <td>{{usuario.nombreUsuario}}</td>
+                        <td>{{usuario.emailUsuario}}</td>
+                        <td><b class="me-1" *ngFor="let rol of usuario.roles">{{rol.rolNombre.slice(5,15)}}</b></td>
+                        <td>
+                            <button class="btn" [matMenuTriggerFor]="menu">
+                                <fa-icon [icon]="fabars"></fa-icon>
+                            </button>
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item>Borrar <fa-icon [icon]="fatrashcan"></fa-icon></button>
+                                <button mat-menu-item>Editar <fa-icon [icon]="fapentosquare"></fa-icon></button>
+                            </mat-menu>
+                        </td>
+
+                    </tr>
+                    <app-paginacion></app-paginacion>
+                </tbody>
+                
+            </table>
+        </div>
+    </div>
+</div>

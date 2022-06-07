@@ -1,0 +1,10 @@
+button.btn-warning {
+    background-color: #f6861e !important;
+    border-color: #f6861e !important;
+}
+div.card{
+    box-shadow: #636363bd 1px 1px 5px 2px ;
+    background-color: white !important;
+    width: 100% !important;
+    border: #f6861e 2px solid !important;
+}

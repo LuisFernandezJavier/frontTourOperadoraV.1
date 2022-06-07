@@ -1,0 +1,71 @@
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid ">
+    <a class="navbar-brand ms-md-5" href="#">
+      <img src="../../assets/img/logo.png" alt="" width="60" height="55" class="d-inline-block align-text-top p-0">
+
+    </a>
+
+    <div class="row reloj me-2">
+      <div class="col-auto mt-2 pe-0 me-1"><strong>{{hora}} :</strong></div>
+      <div class="col-auto mt-2 p-0 me-1"><strong>{{minuto}} : </strong></div>
+      <div class="col-auto mt-2 p-0 me-1"><strong>{{segundos}}</strong></div>
+      <div class="col-auto mt-2 p-0 me-2"><strong>{{ampm}}</strong></div>
+    </div>
+    <!-- administradores -->
+    <div class="nav-item dropdown menu" *ngIf="admin">
+      <a class="nav-link dropdown-toggle menu" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        <b>ADMINSITRACION</b>
+      </a>
+      <ul class="dropdown-menu " aria-labelledby="navbarDropdown" id="menu">
+
+        <li><a class="dropdown-item" [routerLink]="['/creo-itinerario']" >Itinerarios</a></li>
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+        <li><a class="dropdown-item" [routerLink]="['/creo-actividad']">Actividades</a></li>
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+        <li><a class="dropdown-item" [routerLink]="['/usuariosPanel']"  href="#">Panel de usuarios</a></li>
+      </ul>
+    </div>
+    <!-- administradores -->
+    
+
+    
+    <div *ngIf="isLogged" class="dropdown me-md-5 pe-3">
+      <button class="btn btn-secondary " href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        <fa-icon class="me-1" title="Código identificador de grupo" [icon]="usuario"></fa-icon>
+        <b>{{nombreUsuario}}</b>
+      </button>
+
+      <ul class="dropdown-menu m-0 p-0 pt-2 pb-2" aria-labelledby="dropdownMenuLink">
+        <li class="p-0 m-0 logout"><a class="dropdown-item p-0 m-0" (click)="cerrarSesion()" >
+            <fa-icon class="me-1 ms-3" title="Código identificador de grupo" [icon]="usuario"></fa-icon>
+            <b>Salir</b>
+          </a></li>
+
+        <li class="p-0 m-0 logout"><a class="dropdown-item p-0 m-0" [routerLink]="['/miPerfil/' + nombreUsuario]">
+            <fa-icon class="me-1 ms-3" title="Código identificador de grupo" [icon]="usuario"></fa-icon>
+            <b>Perfil</b>
+          </a></li>
+
+      </ul>
+    </div>
+
+
+    <div *ngIf="iniciar">
+      <button class="btn btn-secondary " role="button" aria-expanded="false" (click)="inicio=true">
+        Inicio de sesion
+      </button>
+    </div>
+
+  </div>
+  <div *ngIf="inicio">
+    <app-login></app-login>
+  </div>
+
+
+</nav>

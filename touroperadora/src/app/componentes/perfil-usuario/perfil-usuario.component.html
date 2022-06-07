@@ -1,0 +1,36 @@
+<app-header></app-header> <!-- Header -->
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-sm-5 mt-3 mb-3" *ngFor="let itinerario of itinerarios">
+
+
+            <mat-card class="example-card p-4 ">
+                <mat-card-title-group>
+                    <mat-card-title><b>{{itinerario.nombreHotel}}</b></mat-card-title>
+                    <mat-card-subtitle>{{itinerario.ciudad}} <br> Fechas</mat-card-subtitle>
+
+
+                    <img mat-card-lg-image src="https://material.angular.io/assets/img/examples/shiba2.jpg">
+                </mat-card-title-group>
+                <mat-card-content class="pe-2 ps-2">
+                    <div class="row" *ngFor="let actividad of itinerario.actividades">
+
+                        <mat-card class="cardact  mt-3">
+                            <mat-card-title-group>
+                                <mat-card-title>{{actividad.nombreActividad}}</mat-card-title>
+                                <mat-card-subtitle>{{actividad.descripcionActividad}}.
+                                    <br> <b>{{actividad.precioActividad}} €/Pers.</b>
+                                </mat-card-subtitle>
+                                
+                                
+                            </mat-card-title-group>
+
+                        </mat-card>
+                    </div>
+
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+    </div>
+</div>

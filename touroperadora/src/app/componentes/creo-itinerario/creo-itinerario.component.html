@@ -1,0 +1,395 @@
+<app-header></app-header> <!-- Header -->
+<div class="container-fluid">
+
+    <!-- Modal editar itinerario-->
+    <div class="modal fade" id="modalEditoItinerario" data-bs-backdrop="static" aria-hidden="true"
+        aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="row justify-content-between">
+
+                    <div class="col-5 mt-3 ms-3">
+                        <img src="../../assets/img/logo.png" width="" height="60">
+                    </div>
+                    <div class="col-5 pb-5 mt-3 me-3">
+                        <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+
+                </div>
+                <div class="modal-body">
+                    <h5 class="text-center"><b>Editar itinerario</b></h5>
+
+                    <form [formGroup]=" itinerarioEditForms ">
+                        <div class="col-auto mt-3">
+                            <label><b>Ciudad </b></label>
+                            <input type="text" class="form-control form-control-sm text-color" formControlName="ciudad"
+                                placeholder="Ciudad">
+                        </div>
+                        <div class="col-auto mt-3">
+                            <label><b>Cordenadas del hotel</b></label>
+                            <input type="text" class="form-control form-control-sm text-color"
+                                formControlName="cordenadasHotel" placeholder="Cordenadas del Hotel">
+                        </div>
+                        <div class="col-auto mt-3">
+                            <label><b>Nombre del hotel</b></label>
+                            <input type="text" class="form-control form-control-sm text-color"
+                                formControlName="nombreHotel" placeholder="Nombre del Hotel">
+                        </div>
+                        <div class="col-auto mt-3">
+                            <label><b>Precio por noche</b></label>
+                            <input type="text" class="form-control form-control-sm text-color"
+                                formControlName="precioNoche" placeholder="Precio por Noche">
+                        </div>
+
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-warning" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
+                        data-bs-dismiss="modal">Editar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModalToggle2" data-bs-backdrop="static" aria-hidden="true"
+        aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="row justify-content-between">
+
+                    <div class="col-5 mt-3 ms-3">
+                        <img src="../../assets/img/logo.png" width="" height="60">
+                    </div>
+                    <div class="col-5 pb-5 mt-3 me-3">
+                        <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+
+                </div>
+                <div class="modal-body">
+                    ¿Confirma la edición del itinerario?
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-warning" (click)="editoItinerario()"
+                        data-bs-dismiss="modal">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal editar itinerario -->
+
+    <!-- Modal eliminar actividad -->
+    <div class="modal fade" id="modalEliminoActividad" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="row justify-content-between">
+
+                    <div class="col-5 mt-3 ms-3">
+                        <img src="../../assets/img/logo.png" width="" height="60">
+                    </div>
+                    <div class="col-5 pb-5 mt-3 me-3">
+                        <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+
+                </div>
+
+                <div class="modal-body">
+                    <div class="row text-center mb-4 mt-3">
+                        <h4 class="float-center">CONFIRMACIÓN ELIMINAR ACTIVIDAD</h4>
+                    </div>
+
+
+                    <button type="submit " class="btn btn-warning float-start" data-bs-dismiss="modal">Cancelar</button>
+
+                    <button type="submit " class="btn btn-warning " style="display: block; margin-left: auto; "
+                        data-bs-dismiss="modal"
+                        (click)="eliminoActividad(eliminoActividad_actId , eliminoActividad_itiId)">
+                        Aceptar
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal eliminar actividad -->
+
+    <!-- Modal eliminar Itinerario -->
+    <div class="modal fade" id="modalEliminoItinerario" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="row justify-content-between">
+
+                    <div class="col-5 mt-3 ms-3">
+                        <img src="../../assets/img/logo.png" width="" height="60">
+                    </div>
+                    <div class="col-5 pb-5 mt-3 me-3">
+                        <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+
+                </div>
+
+                <div class="modal-body">
+                    <div class="row text-center mb-4 mt-3">
+                        <h4 class="float-center">CONFIRMACIÓN ELIMINAR ITINERARIO</h4>
+                    </div>
+
+
+                    <button type="submit " class="btn btn-warning float-start" data-bs-dismiss="modal">Cancelar</button>
+
+                    <button type="submit " class="btn btn-warning " style="display: block; margin-left: auto; "
+                        data-bs-dismiss="modal" (click)="eliminoItinerario(eliminoItinerarioId); window()">
+                        Aceptar
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal eliminar Itinerario -->
+
+    <!-- Modal eliminar Imagen -->
+    <div class="modal fade" id="modalEliminoImagen" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="row justify-content-between">
+
+                    <div class="col-5 mt-3 ms-3">
+                        <img src="../../assets/img/logo.png" width="" height="60">
+                    </div>
+                    <div class="col-5 pb-5 mt-3 me-3">
+                        <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+
+                </div>
+
+                <div class="modal-body">
+                    <div class="row text-center mb-4 mt-3">
+                        <h4 class="float-center">CONFIRMACIÓN ELIMINAR IMAGEN AL ITINERARIO</h4>
+                    </div>
+
+
+                    <button type="submit " class="btn btn-warning float-start" data-bs-dismiss="modal">Cancelar</button>
+
+                    <button type="submit " class="btn btn-warning " style="display: block; margin-left: auto; "
+                        data-bs-dismiss="modal" (click)="eliminoImagen(eliminoImagen_itiId)">
+                        Aceptar
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal eliminar Imagen -->
+
+
+    <!-- toast de crear itinerario -->
+    <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 10px; z-index: 1;" *ngIf="toast">
+
+        <div style="position: absolute; top: 0; right: 0;">
+            <ngb-toast class="bg-success text-light mt-3" header="CanaryTrip" [delay]="5000">
+                Itinerario creado
+            </ngb-toast>
+        </div>
+    </div>
+
+    <!-- toast de relacionar actividad -->
+
+    <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 10px; z-index: 1;"
+        *ngIf="toastAct">
+
+        <div style="position: absolute; top: 0; right: 0;">
+            <ngb-toast class="bg-success text-light mt-3" header="CanaryTrip" [delay]="5000">
+                {{TextoToastAct}}
+            </ngb-toast>
+        </div>
+    </div>
+
+
+    <div class="row justify-content-center pt-sm-5 pb-sm-5">
+        <div class="col-sm-3 mt-3 mb-3">
+            <div class="card">
+                <div class="card-body">
+
+                    <form class="" [formGroup]=" itinerarioForms ">
+                        <h5>CREA ITINERARIO</h5>
+                        <div class="col-auto mt-3">
+                            <label><b>Ciudad </b></label>
+                            <input type="text" class="form-control form-control-sm text-color" formControlName="ciudad"
+                                placeholder="Ciudad">
+                        </div>
+                        <div class="col-auto mt-3">
+                            <label><b>Cordenadas del hotel</b></label>
+                            <input type="text" class="form-control form-control-sm text-color"
+                                formControlName="cordenadasHotel" placeholder="Cordenadas del Hotel">
+                        </div>
+                        <div class="col-auto mt-3">
+                            <label><b>Nombre del hotel</b></label>
+                            <input type="text" class="form-control form-control-sm text-color"
+                                formControlName="nombreHotel" placeholder="Nombre del Hotel">
+                        </div>
+                        <div class="col-auto mt-3">
+                            <label><b>Precio por noche</b></label>
+                            <input type="text" class="form-control form-control-sm text-color"
+                                formControlName="precioNoche" placeholder="Precio por Noche">
+                        </div>
+                        <div class="col-auto mt-3">
+                            <label><b>Plazas disponibles</b></label>
+                            <input type="text" class="form-control form-control-sm text-color"
+                                formControlName="plazas" placeholder="Plazas disponibles">
+                        </div>
+
+                        <button class="btn btn-success float-end mt-2" (click)="agregoItinerario()"
+                            [disabled]="itinerarioForms.invalid">
+                            <fa-icon [icon]="facheck"></fa-icon>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-3 mt-3">
+
+            <div class="card">
+                <div class="card-body">
+                    <h5>CONTROL DE IMAGENES</h5>
+
+                    <div class="col-auto mt-3">
+                        <label for="formFile" class="form-label"><b>Subir imagen del hotel</b></label>
+                        <input class="form-control mb-2" type="file" id="formFile" (change)="getArchivo($event)">
+
+                        <button class="btn btn-success float-end  " (click)=" suboImagen() ; window()"
+                            [disabled]="!archivo">
+                            <fa-icon [icon]="facheck"></fa-icon>
+                        </button>
+                        <br>
+                    </div>
+
+                    <form [formGroup]=" relacionImagenForms ">
+
+                        <div class="col-auto  mt-5 ">
+                            <h5>ASIGNAR IMAGEN AL ITINERARIO</h5>
+                            <label><b>Itinerarios</b></label>
+                            <select class="form-select" aria-label="Default select example"
+                                formControlName="itinerarioI">
+
+                                <option *ngFor="let itinerario of arrayItinerario" value="{{itinerario.itinerarioId}}">
+                                    {{itinerario.nombreHotel}}</option>
+                            </select>
+                        </div>
+
+                        <div class="col-auto mt-5">
+
+                            <label><b>Imagenes</b></label>
+                            <select class="form-select" multiple aria-label="multiple select example"
+                                formControlName="imagen">
+                                <option *ngFor="let imagen of arrayImagenes " value="{{imagen.imagenId}}">
+                                    {{imagen.nombreImagen}}</option>
+                            </select>
+                        </div>
+
+                        <button class="btn btn-success float-end mt-2 " (click)="addImageItinerario()"
+                            [disabled]="relacionImagenForms.invalid">
+                            <fa-icon [icon]="facheck"></fa-icon>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-3 mt-3 mb-3">
+
+            <div class="card">
+                <div class="card-body">
+
+                    <form class="" [formGroup]=" relacionForms ">
+                        <h5>AÑADE ATIVIDADES A LOS ITINERARIOS</h5>
+
+                        <div class="col-auto  mt-3">
+                            <label><b>Itinerarios</b></label>
+                            <select class="form-select" aria-label="Default select example"
+                                formControlName="itinerario">
+                                <option selected> Elige un itinerario</option>
+                                <option *ngFor="let itinerario of arrayItinerario" value="{{itinerario.itinerarioId}}">
+                                    {{itinerario.nombreHotel}}</option>
+                            </select>
+                        </div>
+
+                        <div class="col-auto mt-5">
+                            <label><b>Actividades</b></label>
+                            <select class="form-select" multiple aria-label="multiple select example"
+                                formControlName="actividades">
+                                <option *ngFor="let actividad of arrayActividades" value="{{actividad.actividadId}}">
+                                    {{actividad.nombreActividad}}</option>
+                            </select>
+                        </div>
+
+                        <button class="btn btn-success float-end mt-2" (click)="relacionoActividad() "
+                            [disabled]="relacionForms.invalid">
+                            <fa-icon [icon]="facheck"></fa-icon>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row justify-content-center pb-sm-5">
+        <div class="col-sm-10  table-responsive">
+            <table class="table ">
+                <thead>
+                    <tr>
+                        <th scope="col">Ciudad</th>
+                        <th scope="col">Nombre del Hotel</th>
+                        <th scope="col">Precio Noche</th>
+                        <th scope="col">Imagen </th>
+                        <th scope="col">Actividades</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let itinerario of arrayItinerario">
+                        <td>{{itinerario.ciudad}}</td>
+                        <td>{{itinerario.nombreHotel}}</td>
+                        <td>{{itinerario.precioNoche}}€</td>
+                        <td>{{itinerario.imagen?.nombreImagen || ' No hay imagen '}} <button *ngIf="itinerario.imagen"
+                                class="btn p-0" (click)="abroModalImg(itinerario.itinerarioId)">
+                                <fa-icon [icon]="fasquarexmark"></fa-icon>
+                            </button> </td>
+
+                        <td class="">
+                            <b class="me-2" *ngFor="let actividad of itinerario.actividades">| {{actividad.actividadId}}
+                                : {{actividad.nombreActividad.slice(0,5)}}
+                                <button class="btn p-0"
+                                    (click)="abroModalAct(itinerario.itinerarioId , actividad.actividadId)">
+                                    <fa-icon [icon]="fasquarexmark"></fa-icon>
+                                </button> | </b>
+                        </td>
+                        <td>
+                            <button class="btn" [matMenuTriggerFor]="menu">
+                                <fa-icon [icon]="fabars"></fa-icon>
+                            </button>
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item (click)="abroModalIti(itinerario.itinerarioId)">Borrar
+                                    <fa-icon [icon]="fatrashcan"></fa-icon>
+                                </button>
+                                <button mat-menu-item (click)="abroModal(itinerario.itinerarioId) "> Editar <fa-icon
+                                        [icon]="fapentosquare"></fa-icon></button>
+                            </mat-menu>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>

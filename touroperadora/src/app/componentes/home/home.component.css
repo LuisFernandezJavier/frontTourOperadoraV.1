@@ -1,0 +1,61 @@
+.fondocabecera {
+    background-size: cover !important;
+    background-image: url("../../../assets/img/playacabecera.jpg") !important;
+    min-height: 50vh;
+    max-height: 450px !important;
+
+    position: relative;
+}
+
+::placeholder {
+
+    font-size: 14px;
+}
+
+.tarjeta {
+    border-bottom: rgb(64, 110, 235) 5px solid !important;
+}
+
+div.modal-content {
+    border: #f6861e 3px solid !important;
+}
+
+div.moal-header {
+
+    border-bottom: none !important;
+}
+
+button.btn-warning {
+    background-color: #f6861e !important;
+    border-color: #f6861e !important;
+}
+
+.azul-letras {
+    color: #0d6efd !important;
+}
+
+a.azul-letras {
+    text-decoration: none !important;
+}
+
+.footer {
+    position: absolute;
+    left: 0px;
+    bottom: 0px !important;
+
+    width: 100% !important;
+    background-color: #fafafa !important;
+    color: #0d6efd !important;
+
+
+}
+
+body {
+    background-color: #ffffff !important;
+}
+
+div.card {
+    box-shadow: #636363bd 1px 1px 5px 2px;
+    background-color: white !important;
+    width: 100% !important;
+}

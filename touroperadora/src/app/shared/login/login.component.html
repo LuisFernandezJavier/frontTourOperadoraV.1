@@ -1,0 +1,45 @@
+ <!-- Modal -->
+ <div class="modal fade" id="modalInicio" data-bs-backdrop="static" data-bs-keyboard="false"
+ tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+ <div class="modal-dialog">
+     <div class="modal-content">
+         <div class="row justify-content-between">
+
+             <div class="col-5 mt-3 ms-3">
+                 <img src="../../assets/img/logo.png" width="" height="80">
+             </div>
+             <div class="col-5 pb-5 mt-3 me-3">
+                 <button type="button" class="btn-close float-end" data-bs-dismiss="modal" (click)="window()"
+                     aria-label="Close"></button>
+             </div>
+
+         </div>
+
+         <div class="modal-body">
+             <div class="row text-center mb-4 mt-3">
+                 <h4 class="float-center">INICIA SESION</h4>
+             </div>
+             <form class="" [formGroup]=" loginForms " (ngSubmit)=" onLogin() ">
+
+                 <input type="text" class=" form-control " style="margin-bottom: 3%; "
+                     formControlName="nombreUsuario" placeholder="Nombre de usuario ">
+
+                 <input type="password" class=" form-control " style="margin-bottom: 3%; "
+                     formControlName="passUsuario" placeholder=" Contraseña ">
+                     
+                 <div class="alert alert-danger" role="alert"  *ngIf="error">
+                    Credenciales <strong>erroneas</strong> !! 
+                  </div>
+
+                 <button type="submit " class="btn btn-warning float-start"
+                 data-bs-dismiss="modal"   [routerLink]="['/creo-usuario']">Registrate</button>
+
+                 <button type="submit " class="btn btn-warning "
+                     style="display: block; margin-left: auto; " [disabled]="loginForms.invalid ">Log
+                     In</button>
+             </form>
+         </div>
+     </div>
+ </div>
+</div>
+<!-- Modal -->

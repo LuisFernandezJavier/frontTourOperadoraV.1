@@ -1,0 +1,43 @@
+.reloj{
+    background-color:#f6861e;
+    height: 50px;
+    border-radius: 10px;
+    border: #ffc58e 3px solid;
+}
+button {
+    background-color:#f6861e;
+    height: 50px;
+    border-radius: 10px;
+    border: #ffc58e 3px solid;
+    color: black;
+}
+button:hover , button:focus {
+    background-color:#f9bb1d;
+    height: 50px;
+    border-radius: 10px;
+    border: #ffc58e 3px solid;
+    box-shadow: none !important;
+}
+  ul.dropdown-menu.show {
+    border: #fbd880 2px solid;
+    background-color: #f9f7f0;
+}
+a.dropdown-item:hover{
+ background-color: #fbd880;
+}
+nav.navbar {
+    background-color:rgb(255, 255, 255) !important;
+}
+.menu{
+    background-color: rgb(64, 110, 235) !important;
+    border-radius: 10px;
+    border: #0751c0 1px solid !important;
+    color:black !important;
+}
+#menu a.dropdown-item:hover {
+    background-color: rgb(64, 110, 235) !important;
+}
+#menu.show{
+    border:#0751c0 1px solid;
+    background-color: #80aff7;
+}
