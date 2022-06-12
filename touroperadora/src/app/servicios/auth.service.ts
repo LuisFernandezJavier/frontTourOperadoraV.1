@@ -10,12 +10,12 @@ import { NuevoUsuario } from '../modelos/nuevoUsuario';
     providedIn: 'root'
 })
 export class AuthService {
-    
+
     authURL = 'http://localhost:8080/auth';
     constructor(private httpClient: HttpClient) { }
 
     //registro de usuario
-    public nuevoUsuario (nuevoUsuario: NuevoUsuario): Observable<any> {
+    public nuevoUsuario(nuevoUsuario: NuevoUsuario): Observable<any> {
         return this.httpClient.post(this.authURL + '/nuevoUsuario', nuevoUsuario);
     }
 
@@ -23,8 +23,4 @@ export class AuthService {
     public login(loginUsuario: LoginUsuario): Observable<JwtDto> {
         return this.httpClient.post<JwtDto>(this.authURL + '/login', loginUsuario);
     }
-
-    
-    
-    
 }

@@ -17,11 +17,21 @@ export class UsuarioService {
         return this.http.get(this.url + 'usuario/lista')
     }
 
-    getUsuarioName(usuarioNombre:any): Observable<any>{
+    getUsuarioName(usuarioNombre: any): Observable<any> {
         return this.http.get(this.url + 'usuario/detalleUsuario/' + usuarioNombre)
     }
 
     addItinerario(itinerarioId: any, usuarioId: any): Observable<any> {
-        return this.http.post(this.url + 'usuario/addItinerario/' + itinerarioId + '/al/' + usuarioId , null)
+        return this.http.post(this.url + 'usuario/addItinerario/' + itinerarioId + '/al/' + usuarioId, null)
+    }
+
+    eliminoUsuario(usuarioId: any): Observable<any> {
+        return this.http.delete(this.url + 'usuario/eliminoUsuario/' + usuarioId)
+    }
+    editoUsuario(usuarioId: any, editoUsuario: any): Observable<any> {
+        return this.http.put(this.url + 'usuario/editoUsuario/' + usuarioId, editoUsuario)
+    }
+    unUsuario(usuarioId: any): Observable<any> {
+        return this.http.get(this.url + 'usuario/usuarioId/' + usuarioId)
     }
 }

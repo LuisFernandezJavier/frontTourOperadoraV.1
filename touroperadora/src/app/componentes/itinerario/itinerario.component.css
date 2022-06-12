@@ -1,45 +1,63 @@
-.reloj{
-    background-color:#f6861e;
+.reloj {
+    background-color: #f6861e;
     height: 50px;
     border-radius: 10px;
     border: #ffc58e 3px solid;
 }
+
 button.btn {
-    background-color:#f6861e;
+    background-color: #f6861e;
     height: 50px;
     border-radius: 10px;
     border: #ffc58e 3px solid;
     color: black;
 }
-button.btn:hover , button.btn:focus {
-    background-color:#f9bb1d;
+
+button.btn:hover,
+button.btn:focus {
+    background-color: #f9bb1d;
     height: 50px;
     border-radius: 10px;
     border: #ffc58e 3px solid;
     box-shadow: none !important;
 }
-  ul.dropdown-menu.show {
+
+ul.dropdown-menu.show {
     border: #fbd880 2px solid;
     background-color: #f9f7f0;
 }
-a.dropdown-item:hover{
- background-color: #fbd880;
+
+a.dropdown-item:hover {
+    background-color: #fbd880;
 }
+
 nav.navbar {
-    background-color:rgb(255, 255, 255) !important;
+    background-color: rgb(255, 255, 255) !important;
 }
 
-div.card{
-    box-shadow: #636363bd 1px 1px 5px 2px ;
+div.card {
+    box-shadow: #636363bd 1px 1px 5px 2px;
     background-color: white !important;
-}   
-div.mapa{
-    padding: 100px !important;
 }
 
-div.container-fluid{
-    background-color: #f9efdc !important;
+div.mapa {
+    padding: 100px !important;
+    height: 520px;
 }
-.redondo{
+
+div.container-fluid {
+    background-color: #f9efdc !important;
+    min-height: 700px;
+}
+
+.redondo {
     border-radius: 5px;
+}
+
+@media (max-width:748px) {
+    div.mapa {
+        padding: 100px !important;
+        height: 250px;
+        margin-bottom: 20px;
+    }
 }

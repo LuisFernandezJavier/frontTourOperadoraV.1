@@ -1,7 +1,28 @@
-div.container-fluid{
+div.container-fluid {
     background-color: #f9efdc !important;
 }
 
-.cardact{
-    background-color:#a5c6f8 !important;
+.cardact {
+    background-color: #a5c6f8 !important;
+}
+
+.sinborde {
+    border: none !important;
+    background-color: #1a52ed00;
+}
+
+.verde {
+    color: #37ab52 !important;
+}
+
+.cuadrado {
+    border: #1a52ed solid 4px !important;
+
+}
+
+
+@media (min-width:748px) {
+    div.container-fluid {
+        min-height: 700px !important;
+    }
 }

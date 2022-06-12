@@ -1,8 +1,9 @@
 <app-header></app-header> <!-- Header -->
 
 <!-- toast ROJO -->
-<div class="container-fluid">
-    <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 10px; z-index: 1;" *ngIf="toastEliminar">
+<div class="container-fluid p-0">
+    <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 10px; z-index: 1;"
+        *ngIf="toastEliminar">
 
         <div style="position: absolute; top: 0; right: 0;">
             <ngb-toast class="bg-danger text-light mt-3" header="CanaryTrip" [delay]="5000">
@@ -10,189 +11,200 @@
             </ngb-toast>
         </div>
     </div>
-<!-- toast ROJO -->
+    <!-- toast ROJO -->
 
-<!-- toast VERDE -->
-<div class="container-fluid">
-    <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 10px; z-index: 1;" *ngIf="toastVerde">
+    <!-- toast VERDE -->
+    <div class="container-fluid">
+        <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 10px; z-index: 1;"
+            *ngIf="toastVerde">
 
-        <div style="position: absolute; top: 0; right: 0;">
-            <ngb-toast class="bg-success text-light mt-3" header="CanaryTrip" [delay]="5000">
-                {{TextoToastVerde}}
-            </ngb-toast>
+            <div style="position: absolute; top: 0; right: 0;">
+                <ngb-toast class="bg-success text-light mt-3" header="CanaryTrip" [delay]="5000">
+                    {{TextoToastVerde}}
+                </ngb-toast>
+            </div>
         </div>
-    </div>
-<!-- toast VERDE -->
+        <!-- toast VERDE -->
 
-    <!-- Modal editar itinerario-->
-    <div class="modal fade" id="modalEditoActividad" data-bs-backdrop="static" aria-hidden="true"
-        aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
+        <!-- Modal editar actividad-->
+        <div class="modal fade" id="modalEditoActividad" data-bs-backdrop="static" aria-hidden="true"
+            aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
 
-                <div class="row justify-content-between">
+                    <div class="row justify-content-between">
 
-                    <div class="col-5 mt-3 ms-3">
-                        <img src="../../assets/img/logo.png" width="" height="60">
+                        <div class="col-5 mt-3 ms-3">
+                            <img src="../../assets/img/logo.png" width="" height="60">
+                        </div>
+                        <div class="col-5 pb-5 mt-3 me-3">
+                            <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+
                     </div>
-                    <div class="col-5 pb-5 mt-3 me-3">
-                        <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
+                    <div class="modal-body">
+                        <h5 class="text-center"><b>Editar actividad</b></h5>
+
+                        <form [formGroup]=" actividadEditForms ">
+                            <div class="col-auto mt-3">
+                                <label><b>Nombre de la actividad</b></label>
+                                <input type="text" class="form-control form-control-sm text-color"
+                                    formControlName="nombreActividad" placeholder="Nombre de la actividad">
+                            </div>
+                            <div class="col-auto mt-3">
+                                <label><b>Precio de la actividad</b></label>
+                                <input type="number" class="form-control form-control-sm text-color"
+                                    formControlName="precioActividad" placeholder="Precio de la actividad">
+                            </div>
+                            <div class="col-auto mt-3">
+                                <label><b>Breve descrpción</b></label>
+                                <input type="text" class="form-control form-control-sm text-color"
+                                    formControlName="descripcionActividad" placeholder="Breve descrpción">
+                            </div>
+                        </form>
                     </div>
-
-                </div>
-                <div class="modal-body">
-                    <h5 class="text-center"><b>Editar actividad</b></h5>
-
-                    <form [formGroup]=" actividadEditForms ">
-                        <div class="col-auto mt-3">
-                            <label><b>Nombre de la actividad</b></label>
-                            <input type="text" class="form-control form-control-sm text-color" formControlName="nombreActividad"
-                                placeholder="Nombre de la actividad">
-                        </div>
-                        <div class="col-auto mt-3">
-                            <label><b>Precio de la actividad</b></label>
-                            <input type="number" class="form-control form-control-sm text-color"
-                                formControlName="precioActividad" placeholder="Precio de la actividad">
-                        </div>
-                        <div class="col-auto mt-3">
-                            <label><b>Breve descrpción</b></label>
-                            <input type="text" class="form-control form-control-sm text-color"
-                                formControlName="descripcionActividad" placeholder="Breve descrpción">
-                        </div>
-
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-warning" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
-                        data-bs-dismiss="modal">Editar</button>
+                    <div class="modal-footer">
+                        <button class="btn btn-warning" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
+                            data-bs-dismiss="modal">Editar</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="modal fade" id="exampleModalToggle2" data-bs-backdrop="static" aria-hidden="true"
-        aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="row justify-content-between">
+        <div class="modal fade" id="exampleModalToggle2" data-bs-backdrop="static" aria-hidden="true"
+            aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="row justify-content-between">
 
-                    <div class="col-5 mt-3 ms-3">
-                        <img src="../../assets/img/logo.png" width="" height="60">
-                    </div>
-                    <div class="col-5 pb-5 mt-3 me-3">
-                        <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                    </div>
+                        <div class="col-5 mt-3 ms-3">
+                            <img src="../../assets/img/logo.png" width="" height="60">
+                        </div>
+                        <div class="col-5 pb-5 mt-3 me-3">
+                            <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
 
-                </div>
-                <div class="modal-body">
-                    ¿Confirma la edición de la actividad?
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-warning" 
-                        data-bs-dismiss="modal" (click)="editoItinerario()">Confirmar</button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Confirma la edición de la actividad?
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-warning" data-bs-dismiss="modal"
+                            (click)="editoActividad()">Confirmar</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Modal editar itinerario -->
+        <!-- Modal editar actividad -->
 
-    <!-- Modal eliminar actividad -->
-    <div class="modal fade" id="modalEliminoActividad2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="row justify-content-between">
+        <!-- Modal eliminar actividad -->
+        <div class="modal fade" id="modalEliminoActividad2" data-bs-backdrop="static" data-bs-keyboard="false"
+            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="row justify-content-between">
 
-                    <div class="col-5 mt-3 ms-3">
-                        <img src="../../assets/img/logo.png" width="" height="60">
-                    </div>
-                    <div class="col-5 pb-5 mt-3 me-3">
-                        <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                    </div>
+                        <div class="col-5 mt-3 ms-3">
+                            <img src="../../assets/img/logo.png" width="" height="60">
+                        </div>
+                        <div class="col-5 pb-5 mt-3 me-3">
+                            <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
 
-                </div>
-
-                <div class="modal-body">
-                    <div class="row text-center mb-4 mt-3">
-                        <h4 class="float-center">CONFIRMACIÓN ELIMINAR ACTIVIDAD</h4>
                     </div>
 
-
-                    <button type="submit " class="btn btn-warning float-start" data-bs-dismiss="modal">Cancelar</button>
-
-                    <button type="submit " class="btn btn-warning " style="display: block; margin-left: auto; "
-                        data-bs-dismiss="modal"
-                        (click)="eliminoActividad(eliminoActividad_actId)">
-                        Aceptar
-                    </button>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal eliminar actividad -->
-   
-    <div class="row justify-content-center">
-        <div class="col-sm-8 mt-3 mb-3">
-            <div class="card">
-                <div class="card-body">
-                    <h5>CREA ACTIVIDADES</h5>
-                    <form [formGroup]=" actividadForms ">
-                        <div class="col-auto mt-3">
-                            <label><b>Nombre de la actividad</b></label>
-                            <input type="text" class="form-control form-control-sm text-color" formControlName="nombreActividad"
-                                placeholder="Nombre de la actividad">
+                    <div class="modal-body">
+                        <div class="row text-center mb-4 mt-3">
+                            <h4 class="float-center">CONFIRMACIÓN ELIMINAR ACTIVIDAD</h4>
                         </div>
-                        <div class="col-auto mt-3">
-                            <label><b>Precio de la actividad</b></label>
-                            <input type="text" class="form-control form-control-sm text-color"
-                                formControlName="precioActividad" placeholder="Precio de la actividad">
-                        </div>
-                        <div class="col-auto mt-3">
-                            <label><b>Breve descrpción</b></label>
-                            <input type="text" class="form-control form-control-sm text-color"
-                                formControlName="descripcionActividad" placeholder="Breve descrpción">
-                        </div>
-                        
-                        <button class="btn btn-success float-end mt-2 "(click)="agregoActividad()"> <fa-icon [icon]="facheck"></fa-icon></button>
-                    </form>
+
+
+                        <button type="submit " class="btn btn-warning float-start"
+                            data-bs-dismiss="modal">Cancelar</button>
+
+                        <button type="submit " class="btn btn-warning " style="display: block; margin-left: auto; "
+                            data-bs-dismiss="modal" (click)="eliminoActividad(eliminoActividad_actId)">
+                            Aceptar
+                        </button>
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-sm-8  table-responsive">
-            <table class="table ">
-                <thead>
-                  <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Precio</th>
-                    <th scope="col">Descripcion</th>
-                    <th scope="col">Opciones</th>
-                    
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let actividad of arrayActividades">
-                    <td >{{actividad.nombreActividad}}</td>
-                    <td>{{actividad.precioActividad}}€</td>
-                    <td>{{actividad.descripcionActividad}}</td>
-                    <td>
-                        <button class="btn" [matMenuTriggerFor]="menu"><fa-icon [icon]="fabars"></fa-icon></button>
-                            <mat-menu #menu="matMenu">
-                                <button mat-menu-item (click)="abroModalAct(actividad.actividadId)">Borrar <fa-icon [icon]="fatrashcan"></fa-icon></button>
-                                <button mat-menu-item (click)="abroModalEditoAct(actividad.actividadId)">Editar <fa-icon [icon]="fapentosquare"></fa-icon></button>
-                            </mat-menu>
-                    </td>
-                    
-                  </tr>
-                  
-                </tbody>
-              </table>
+        <!-- Modal eliminar actividad -->
+
+        <div class="row justify-content-center">
+            <div class="col-sm-8 mt-3 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>CREA ACTIVIDADES</h5>
+                        <form [formGroup]=" actividadForms ">
+                            <div class="col-auto mt-3">
+                                <label><b>Nombre de la actividad</b></label>
+                                <input type="text" class="form-control form-control-sm text-color"
+                                    formControlName="nombreActividad" placeholder="Nombre de la actividad">
+                            </div>
+                            <div class="col-auto mt-3">
+                                <label><b>Precio de la actividad</b></label>
+                                <input type="text" class="form-control form-control-sm text-color"
+                                    formControlName="precioActividad" placeholder="Precio de la actividad">
+                            </div>
+                            <div class="col-auto mt-3">
+                                <label><b>Breve descrpción</b></label>
+                                <input type="text" class="form-control form-control-sm text-color"
+                                    formControlName="descripcionActividad" placeholder="Breve descrpción">
+                            </div>
+
+                            <button class="btn btn-success float-end mt-2 " (click)="agregoActividad()"
+                                disabled="actividadForms">
+                                <fa-icon [icon]="facheck"></fa-icon>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center mb-5">
+            <div class="col-sm-8  table-responsive">
+                <table class="table ">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Descripcion</th>
+                            <th scope="col">Opciones</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let actividad of arrayActividades | paginate:page_size:page_number">
+                            <td>{{actividad.nombreActividad}}</td>
+                            <td>{{actividad.precioActividad}}€</td>
+                            <td>{{actividad.descripcionActividad}}</td>
+                            <td>
+                                <button class="btn" [matMenuTriggerFor]="menu">
+                                    <fa-icon [icon]="fabars"></fa-icon>
+                                </button>
+                                <mat-menu #menu="matMenu">
+                                    <button mat-menu-item (click)="abroModalAct(actividad.actividadId)">Borrar <fa-icon
+                                            [icon]="fatrashcan"></fa-icon></button>
+                                    <button mat-menu-item (click)="abroModalEditoAct(actividad.actividadId)">Editar
+                                        <fa-icon [icon]="fapentosquare"></fa-icon></button>
+                                </mat-menu>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+                <mat-paginator [length]="arrayActividades.length" [pageSize]="page_size"
+                    [pageSizeOptions]="pageSizeOptions" aria-label="Select page" (page)="handlePage($event)">
+                </mat-paginator>
+            </div>
+
+            <app-footer class="p-0 mt-5"></app-footer>
         </div>
 
     </div>
-</div>

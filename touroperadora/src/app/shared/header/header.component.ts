@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { faDoorOpen, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faBorderAll, faDoorOpen, faUser } from '@fortawesome/free-solid-svg-icons';
 import { NgbRefDirective } from '@ng-bootstrap/ng-bootstrap/accordion/accordion';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/servicios/auth.service';
@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   //iconos
   usuario = faUser;
   salir = faDoorOpen;
+  control = faBorderAll
   admin = false;
 
   //RELOJ

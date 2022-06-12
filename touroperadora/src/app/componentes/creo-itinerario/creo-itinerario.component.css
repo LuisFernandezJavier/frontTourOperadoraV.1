@@ -1,19 +1,21 @@
-div.container-fluid{
+div.container-fluid {
     background-color: #f9efdc !important;
 }
 
-div.card-body{
-    min-height : 530px
+div.card-body {
+    min-height: 530px
 }
 
-table{
+table {
     background-color: #ffffff;
     border-radius: 5px !important;
-    
+
 }
+
 td {
-    border:none !important;
+    border: none !important;
 }
-.tdpequeño{
+
+.tdpequeño {
     width: 50px !important;
 }

@@ -12,9 +12,7 @@
     font-size: 14px;
 }
 
-.tarjeta {
-    border-bottom: rgb(64, 110, 235) 5px solid !important;
-}
+
 
 div.modal-content {
     border: #f6861e 3px solid !important;
@@ -38,24 +36,54 @@ a.azul-letras {
     text-decoration: none !important;
 }
 
-.footer {
-    position: absolute;
-    left: 0px;
-    bottom: 0px !important;
-
-    width: 100% !important;
-    background-color: #fafafa !important;
-    color: #0d6efd !important;
-
-
+img {
+    width: 225px !important;
+    height: 225px !important;
 }
+
 
 body {
     background-color: #ffffff !important;
+}
+
+mat-paginator {
+    box-shadow: #636363bd 1px 1px 5px 2px;
+    background-color: white !important;
+
 }
 
 div.card {
     box-shadow: #636363bd 1px 1px 5px 2px;
     background-color: white !important;
     width: 100% !important;
+}
+
+@media (max-width:748px) {
+    img {
+        width: 100% !important;
+        margin-bottom: 20px;
+
+    }
+}
+
+.logo {
+    width: 80px !important;
+    height: 80px !important;
+}
+
+
+@media (min-width:748px) {
+    div.container-fluid {
+        min-height: 700px !important;
+    }
+
+    div.card {
+        box-shadow: #636363bd 1px 1px 5px 2px;
+        background-color: white !important;
+        width: 100% !important;
+        min-width: 600px !important;
+        max-width: 600px !important;
+        min-height: 200px !important;
+        max-height: 235px !important;
+    }
 }

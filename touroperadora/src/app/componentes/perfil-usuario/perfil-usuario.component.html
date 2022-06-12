@@ -1,16 +1,22 @@
 <app-header></app-header> <!-- Header -->
-<div class="container-fluid">
-    <div class="row justify-content-center">
+<div class="container-fluid ">
+    <div class="row justify-content-center ">
         <div class="col-sm-5 mt-3 mb-3" *ngFor="let itinerario of itinerarios">
-
-
             <mat-card class="example-card p-4 ">
                 <mat-card-title-group>
                     <mat-card-title><b>{{itinerario.nombreHotel}}</b></mat-card-title>
-                    <mat-card-subtitle>{{itinerario.ciudad}} <br> Fechas</mat-card-subtitle>
+                    <mat-card-subtitle>
+                        <fa-icon class="me-1" [icon]="falocationdot"></fa-icon>{{itinerario.ciudad}}
+                    </mat-card-subtitle>
+                    <mat-card-subtitle>
+                        <fa-icon class="me-1" [icon]="fapeoplegroup"></fa-icon>{{itinerario.plazasCompradas}} <br>
+                        <fa-icon class="me-1" [icon]="facalendar"></fa-icon> <b>Salida</b>
+                        {{itinerario.fechaInicio.slice(0,10)}} <br>
+                        <fa-icon class="me-1" [icon]="facalendar"></fa-icon> <b>Vuelta</b>
+                        {{itinerario.fechaFinal.slice(0,10)}}
+                    </mat-card-subtitle>
 
-
-                    <img mat-card-lg-image src="https://material.angular.io/assets/img/examples/shiba2.jpg">
+                    <img mat-card-md-image src="../../../assets/img/logo.png">
                 </mat-card-title-group>
                 <mat-card-content class="pe-2 ps-2">
                     <div class="row" *ngFor="let actividad of itinerario.actividades">
@@ -21,16 +27,38 @@
                                 <mat-card-subtitle>{{actividad.descripcionActividad}}.
                                     <br> <b>{{actividad.precioActividad}} €/Pers.</b>
                                 </mat-card-subtitle>
-                                
-                                
                             </mat-card-title-group>
-
                         </mat-card>
-                    </div>
 
+                    </div>
+                    <div class="col float-end mt-2 ">
+                        <p>
+                            <a class="btn btn-primary" data-bs-toggle="collapse"
+                                href="#numero{{itinerario.itinerarioId}}" role="button" aria-expanded="false"
+                                aria-controls="collapseExample">
+                                <fa-icon class="me-1" [icon]="fafilelines"></fa-icon> Detalles
+                            </a>
+                        </p>
+                    </div>
+                    <div class="collapse mt-2" id="numero{{itinerario.itinerarioId}}">
+                        <div class="card card-body sinborde ">
+                            <h6><b>DETALLES DE FACTURACIÓN</b></h6>
+                            <p *ngIf="itinerario.importeActividad > 0"> Importe total de actividades <br>
+                                <b>{{itinerario.importeActividad}}€</b></p>
+                            <p>Importe total de la estacia por persona <br> <b>{{itinerario.importeEstancia}}€</b></p>
+                            <p class="cuadrado text-center p-2">Importe total <br> <b>{{itinerario.importeTotal}}€</b>
+                            </p>
+                            <button class="btn btn-primary"
+                                (click)="crearPdf( itinerario.importeEstancia ,itinerario.importeActividad , itinerario.importeTotal, itinerario.fechaInicio ,itinerario.fechaFinal , itinerario.nombreHotel , itinerario.plazasCompradas)">ABRIR
+                                PDF</button>
+                        </div>
+                    </div>
                 </mat-card-content>
             </mat-card>
         </div>
 
     </div>
+
+
 </div>
+<app-footer class="p-0"></app-footer>

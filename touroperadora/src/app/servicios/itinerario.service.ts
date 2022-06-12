@@ -13,6 +13,9 @@ export class ItinerarioService {
     itinerarios(): Observable<any> {
         return this.http.get(this.url + 'itinerario/lista')
     }
+    itinerariosHome(): Observable<any> {
+        return this.http.get(this.url + 'itinerario/lista2')
+    }
     unItinerario(itinerarioId: any): Observable<any> {
         return this.http.get(this.url + 'itinerario/detalleItinerario/' + itinerarioId)
     }

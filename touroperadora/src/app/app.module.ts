@@ -17,17 +17,30 @@ import { CreoActividadComponent } from './componentes/creo-actividad/creo-activi
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //      ANGULAR MATERIAL ----------------------------------------------------------------------------------------------------------
-import {MatSelectModule} from '@angular/material/select';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatCardModule} from '@angular/material/card';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatCardModule } from '@angular/material/card';
+import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
+
 //      ANGULAR MATERIAL ----------------------------------------------------------------------------------------------------------
+
+//highcharts
+import { ChartModule } from 'angular-highcharts';
+
+import { HighchartsChartModule } from 'highcharts-angular';
+
+
 
 import { PerfilUsuarioComponent } from './componentes/perfil-usuario/perfil-usuario.component';
 import { interceptorProvider } from './interceptors/interceptor.service';
 import { UsuariosComponent } from './componentes/usuarios/usuarios.component';
-import { PaginacionComponent } from './shader/paginacion/paginacion.component';
+
 import { PaginatePipe } from './pipes/paginate.pipe';
+import { CustomMatPaginatorIntl } from './componentes/paginator-es';
+import { FooterComponent } from './shared/footer/footer.component';
+import { AdmiControlComponent } from './componentes/admi-control/admi-control.component';
+
+
 
 @NgModule({
   declarations: [
@@ -41,9 +54,11 @@ import { PaginatePipe } from './pipes/paginate.pipe';
     CreoActividadComponent,
     PerfilUsuarioComponent,
     UsuariosComponent,
-    PaginacionComponent,
     PaginatePipe,
-    
+    FooterComponent,
+    AdmiControlComponent,
+
+
   ],
   imports: [
     BrowserModule,
@@ -56,11 +71,19 @@ import { PaginatePipe } from './pipes/paginate.pipe';
     MatSelectModule,
     MatCardModule,
     MatMenuModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    ChartModule,
+    HighchartsChartModule
+
+
 
   ],
   providers: [
-    interceptorProvider
+    interceptorProvider,
+    {
+      provide: MatPaginatorIntl,
+      useClass: CustomMatPaginatorIntl
+    }
   ],
   bootstrap: [AppComponent]
 })

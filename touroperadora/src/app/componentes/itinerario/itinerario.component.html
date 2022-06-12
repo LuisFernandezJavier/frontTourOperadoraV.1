@@ -8,28 +8,22 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="row justify-content-between">
-
           <div class="col-5 mt-3 ms-3">
             <img src="../../assets/img/logo.png" width="" height="80">
           </div>
           <div class="col-5 pb-5 mt-3 me-3">
             <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-
         </div>
-
         <div class="modal-body">
           <div class="row text-center mb-4 mt-3">
             <h4 class="float-center">CONFIRMACIÓN DE RESERVA</h4>
           </div>
-
-
           <button type="submit " class="btn btn-warning float-start" data-bs-dismiss="modal">Cancelar</button>
-
-          <button type="submit " class="btn btn-warning " style="display: block; margin-left: auto; " (click)="contrato()" >
+          <button type="submit " class="btn btn-warning " style="display: block; margin-left: auto; "
+            (click)="contrato()">
             Aceptar
           </button>
-
         </div>
       </div>
     </div>
@@ -37,75 +31,80 @@
   <!-- Modal -->
 
 
-  <div class="row justify-content-center">
-    <div class="col-md-6 justify-content-center">
+  <div class="row justify-content-center ">
+    <div class="col-md-6 justify-content-center mt-5">
 
       <div class="card mb-3 mt-4">
         <div class="row g-0">
           <div class="col-md-4 p-1">
-            <img  [src]="imagenRecibo" class="redondo" height="100%" width="100%">
+            <img [src]="imagenRecibo" class="redondo" height="100%" width="100%">
           </div>
           <div class="col-md-8">
             <div class="card-body">
-              <h5 class="card-title">{{objetoItinerario.nombreHotel}}</h5>
-              <div class="row">
-                <div class="col-auto"> {{objetoItinerario.ciudad}}</div>
-                <div class="col-auto"> {{objetoItinerario.precioNoche}}€ / noche</div>
+              <h5 class="card-title "><b>{{objetoItinerario.nombreHotel}}</b> </h5> <b
+                class="text-muted mt-0">{{objetoItinerario.ciudad}}</b>
+              <div class="row mt-4 mb-2">
+                <div class="col-auto"><b> Disponibilidad <br>
+                    <fa-icon class="me-1" [icon]="fapeoplegroup"></fa-icon> {{objetoItinerario.plazas}}
+                  </b></div>
+                <div class="col-auto"><b> {{objetoItinerario.precioNoche}}€ Noche </b></div>
               </div>
               <div class="row">
-                <div class="col-auto"> FECHAS</div>
-                <div class="col-auto ms-2">Plazas disponibles {{objetoItinerario.plazas}}</div>
-              </div>
-              <div class="row mt-1">
-                <div class="col-auto">
-                  <form [formGroup]="actividadesForms">
-                    <mat-form-field>
-                      <mat-select [formControl]="actividadesForms1" multiple>
-                        <mat-select-trigger>
-                          {{actividadesForms1.value ? actividadesForms1.value[0] : ''}}
-                          <span *ngIf="actividadesForms1.value?.length > 1" class="example-additional-selection">
-                            (+{{actividadesForms1.value.length - 1 }} {{actividadesForms1.value?.length === 2 ? 'otro' :
-                            'otros'}})
-                          </span>
-                        </mat-select-trigger>
-                        <mat-option *ngFor="let actividad of objetoItinerario.actividades"
-                          value="{{actividad.actividadId}}" [value]="actividad">{{actividad.nombreActividad}}
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                  </form>
-                </div>
 
-                <div class="col-auto">
-                    <form [formGroup]="plazasForms">
+                <div class="col-auto ms-2"></div>
+              </div>
+              <div class="row mt-1 p-4">
+                <div class="card p-4 ">
+                  <div class="row">
+                    <div class="col-sm-7 ">
+                      <label><b>Elige actividad</b></label>
+                      <form [formGroup]="actividadesForms">
+
+                        <mat-form-field>
+                          <mat-select [formControl]="actividadesForms1" multiple>
+                            <label class="mt-2 mb-2 text-muted ms-5 ps-5"><b>ACTIVIDADES</b></label>
+                            <mat-option *ngFor="let actividad of objetoItinerario.actividades"
+                              value="{{actividad.actividadId}}">{{actividad.nombreActividad}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </form>
+                    </div>
+                    <div class="col-sm-5">
+                      <form [formGroup]="plazasForms">
+                        <label><b>Plazas</b></label>
                         <input type="number" class="form-control" placeholder="Plazas" formControlName="plazasContrato">
-                    </form>
+                        <label><b>Fecha inicio</b></label>
+                        <input type="date" class="form-control" formControlName="fechaInicio">
+                        <label><b>Fecha fin</b></label>
+                        <input type="date" class="form-control" formControlName="fechaFinal">
+                      </form>
+                    </div>
+                  </div>
                 </div>
               </div>
               <!-- boton contratar para login -->
-              <div class="row justify-content-end mt-5" *ngIf="iniciocontratar">
+              <div class="row justify-content-end mt-2" *ngIf="iniciocontratar">
                 <div class="col-auto me-4" (click)="inicio=true"> <button class="btn">Contratar</button></div>
               </div>
 
 
               <!-- boton contratar para contratar -->
-              <div class="row justify-content-end mt-5" *ngIf="contratar">
+              <div class="row justify-content-end mt-2" *ngIf="contratar">
                 <div class="col-auto me-4"> <button class="btn" (click)="abroModal()">Contratar</button></div>
               </div>
               <div *ngIf="inicio">
                 <app-login></app-login>
               </div>
-
-
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="col-md-5 col-12 mapa m-3" id="mapbox">
-
-
+    <div class="col-md-5 col-12   ms-sm-3 mt-5">
+      <div class="card mapa mt-4" id="mapbox">
+      </div>
     </div>
   </div>
 </div>
+<app-footer class="p-0"></app-footer>

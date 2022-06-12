@@ -35,7 +35,7 @@
 
     
     <div *ngIf="isLogged" class="dropdown me-md-5 pe-3">
-      <button class="btn btn-secondary " href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+      <button class="btn btn-secondary me-3" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
         aria-expanded="false">
         <fa-icon class="me-1" title="Código identificador de grupo" [icon]="usuario"></fa-icon>
         <b>{{nombreUsuario}}</b>
@@ -47,9 +47,13 @@
             <b>Salir</b>
           </a></li>
 
-        <li class="p-0 m-0 logout"><a class="dropdown-item p-0 m-0" [routerLink]="['/miPerfil/' + nombreUsuario]">
+        <li class="p-0 m-0 logout"*ngIf="!admin"><a class="dropdown-item p-0 m-0" [routerLink]="['/miPerfil/' + nombreUsuario]">
             <fa-icon class="me-1 ms-3" title="Código identificador de grupo" [icon]="usuario"></fa-icon>
             <b>Perfil</b>
+          </a></li>
+          <li class="p-0 m-0 logout" *ngIf="admin"><a class="dropdown-item p-0 m-0" [routerLink]="['/adminControl' ]">
+            <fa-icon class="me-1 ms-3" title="Código identificador de grupo" [icon]="control"></fa-icon>
+            <b>Panel de control</b>
           </a></li>
 
       </ul>

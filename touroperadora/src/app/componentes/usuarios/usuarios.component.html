@@ -1,5 +1,104 @@
 <app-header></app-header> <!-- Header -->
 <div class="container-fluid">
+
+    <!-- Modal eliminar actividad -->
+    <div class="modal fade" id="modalEliminoUsuario" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="row justify-content-between">
+
+                    <div class="col-5 mt-3 ms-3">
+                        <img src="../../assets/img/logo.png" width="" height="60">
+                    </div>
+                    <div class="col-5 pb-5 mt-3 me-3">
+                        <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="row text-center mb-4 mt-3">
+                        <h4 class="float-center">CONFIRMACIÓN ELIMINAR USUARIO</h4>
+                    </div>
+                    <button type="submit " class="btn btn-warning float-start" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit " class="btn btn-warning " style="display: block; margin-left: auto; "
+                        data-bs-dismiss="modal" (click)="eliminoUsuario(eliminoUsuarioId)">
+                        Aceptar
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal eliminar USUARIO -->
+
+    <!-- Modal editar USUARIO-->
+    <div class="modal fade" id="modalEditoUsuario" data-bs-backdrop="static" aria-hidden="true"
+        aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="row justify-content-between">
+
+                    <div class="col-5 mt-3 ms-3">
+                        <img src="../../assets/img/logo.png" width="" height="60">
+                    </div>
+                    <div class="col-5 pb-5 mt-3 me-3">
+                        <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+
+                </div>
+                <div class="modal-body">
+                    <h5 class="text-center"><b>Editar usuario</b></h5>
+
+                    <form class="" [formGroup]=" editoUsuarioForms ">
+
+                        <label><b>Nombre</b></label>
+                        <input type="text" class=" form-control " style="margin-bottom: 3%; "
+                            formControlName="nombreUsuario" placeholder="Nombre de usuario ">
+                        <label><b>Email</b></label>
+                        <input type="text" class=" form-control " style="margin-bottom: 3%; "
+                            formControlName="emailUsuario" placeholder=" Email ">
+                        <label><b>Rol</b></label>
+                        <select class="form-select  mb-3 " formControlName="role" placeholder="Rol">
+                            <option value="user">Usuario</option>
+                            <option value="admin">Administrador</option>
+                        </select>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-warning" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
+                        data-bs-dismiss="modal">Editar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModalToggle2" data-bs-backdrop="static" aria-hidden="true"
+        aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="row justify-content-between">
+                    <div class="col-5 mt-3 ms-3">
+                        <img src="../../assets/img/logo.png" width="" height="60">
+                    </div>
+                    <div class="col-5 pb-5 mt-3 me-3">
+                        <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    ¿Confirma la edición del usuario?
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-warning" data-bs-dismiss="modal" (click)="editoUsuario()">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal editar USUARIO-->
+
     <div class="row justify-content-center">
         <div class="col-sm-4 mt-5 mb-5">
             <div class="card">
@@ -18,7 +117,6 @@
                         <label><b>Repite pass</b></label>
                         <input type="password" class=" form-control " style="margin-bottom: 2%; "
                             formControlName="passUsuario2" placeholder=" Repite la contraseña ">
-
                         <label><b>Rol</b></label>
                         <select class="form-select  mb-3 " formControlName="role" placeholder="Rol">
 
@@ -30,10 +128,6 @@
                         <div class="alert alert-danger mb-2" *ngIf="errorPass">
                             <span class="error"> Contraseñas no <strong>coinciden</strong> !! </span>
                         </div>
-
-                        <button type="submit " class="btn btn-warning float-start" data-bs-dismiss="modal"
-                            [routerLink]="['']">Cancelar</button>
-
                         <button type="submit " class="btn btn-warning " style="display: block; margin-left: auto; "
                             [disabled]="nuevoUsuarioForms.invalid " (click)="creoUsuario()">Guardar</button>
                     </form>
@@ -52,7 +146,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let usuario of arrayUsuarios">
+                    <tr *ngFor="let usuario of arrayUsuarios | paginate:page_size:page_number">
                         <td>{{usuario.nombreUsuario}}</td>
                         <td>{{usuario.emailUsuario}}</td>
                         <td><b class="me-1" *ngFor="let rol of usuario.roles">{{rol.rolNombre.slice(5,15)}}</b></td>
@@ -61,16 +155,21 @@
                                 <fa-icon [icon]="fabars"></fa-icon>
                             </button>
                             <mat-menu #menu="matMenu">
-                                <button mat-menu-item>Borrar <fa-icon [icon]="fatrashcan"></fa-icon></button>
-                                <button mat-menu-item>Editar <fa-icon [icon]="fapentosquare"></fa-icon></button>
+                                <button mat-menu-item (click)="abroModalEliminoUsu(usuario.usuarioId)">Borrar <fa-icon
+                                        [icon]="fatrashcan"></fa-icon></button>
+                                <button mat-menu-item (click)="abroModalEditarUsu(usuario.usuarioId)">Editar <fa-icon
+                                        [icon]="fapentosquare"></fa-icon></button>
                             </mat-menu>
                         </td>
 
                     </tr>
-                    <app-paginacion></app-paginacion>
                 </tbody>
-                
             </table>
+            <mat-paginator [length]="arrayUsuarios.length" [pageSize]="page_size" [pageSizeOptions]="pageSizeOptions"
+                aria-label="Select page" (page)="handlePage($event)">
+            </mat-paginator>
         </div>
+        <app-footer class="p-0 mt-5"></app-footer>
     </div>
+
 </div>

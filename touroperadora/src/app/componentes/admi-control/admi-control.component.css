@@ -1,0 +1,31 @@
+div.container-fluid {
+    background-color: #f9efdc !important;
+}
+
+@media (min-width:748px) {
+    div.container-fluid {
+        min-height: 900px !important;
+    }
+}
+
+.sombra,
+div.card {
+    box-shadow: #636363bd 1px 1px 5px 2px;
+    background-color: white !important;
+
+}
+
+.page-header {
+    font-style: oblique;
+}
+
+div.col-sm-3 :hover {
+
+
+    background-color: #7cb5ec !important;
+}
+
+img {
+    display: block;
+    margin: auto;
+}

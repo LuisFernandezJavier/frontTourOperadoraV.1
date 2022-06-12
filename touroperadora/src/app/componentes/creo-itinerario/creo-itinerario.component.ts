@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PageEvent } from '@angular/material/paginator';
 import { faArrowDownWideShort, faBars, faCheck, faPenToSquare, faSquare, faSquareXmark, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { ActividadService } from 'src/app/servicios/actividad.service';
 import { ImagenService } from 'src/app/servicios/imagen.service';
@@ -25,12 +26,19 @@ export class CreoItinerarioComponent implements OnInit {
   modalEliminoItinerario: any;
   modalEliminoImagen: any;
   //modales
+  //paginacion
+  page_size: number = 5;
+  page_number: number = 1;
+  pageSizeOptions = [1, 5, 10, 25, 50];
+  //paginacion
 
+  itinerarioEditoId: any;
   toast = false;
+  toastVerde: any
   toastAct = false;
   TextoToastAct: any;
   arrayActividades: any;
-  arrayItinerario: any;
+  arrayItinerario: any = [];
   arrayImagenes: any;
   itinerarioForms: FormGroup;
   relacionForms: FormGroup;
@@ -55,18 +63,14 @@ export class CreoItinerarioComponent implements OnInit {
       nombreHotel: ['', Validators.required],
       precioNoche: ['', Validators.required],
       plazas: ['', Validators.required],
-      
-     
-
     });
+
     this.itinerarioEditForms = this.vb.group({
-      itinerarioId: ['', Validators.required],
       ciudad: ['', Validators.required],
       cordenadasHotel: ['', Validators.required],
       nombreHotel: ['', Validators.required],
       precioNoche: ['', Validators.required],
-      actividades: ['', Validators.required],
-      imagenHotel: ['', Validators.required],
+      plazas: ['', Validators.required],
 
     });
 
@@ -79,12 +83,10 @@ export class CreoItinerarioComponent implements OnInit {
       itinerarioI: ['', Validators.required],
       imagen: ['', Validators.required],
     });
-
   }
 
 
   ngOnInit(): void {
-    
     this.getActividades();
     this.getItinerarios();
     this.getImagenes();
@@ -92,6 +94,10 @@ export class CreoItinerarioComponent implements OnInit {
     this.modalEliminoActividad = new window.bootstrap.Modal(document.getElementById('modalEliminoActividad'));
     this.modalEliminoItinerario = new window.bootstrap.Modal(document.getElementById('modalEliminoItinerario'));
     this.modalEliminoImagen = new window.bootstrap.Modal(document.getElementById('modalEliminoImagen'));
+  }
+  handlePage(e: PageEvent) {
+    this.page_number = e.pageIndex + 1;
+    this.page_size = e.pageSize;
   }
 
   getActividades() {
@@ -107,14 +113,9 @@ export class CreoItinerarioComponent implements OnInit {
     })
   }
 
-
   getItinerarios() {
     this.itinerarioservice.itinerarios().subscribe((listaitinerarios: any) => {
-      for (let i = 0; i < listaitinerarios.length; i++) {
-        const itinerario = {
 
-        }
-      }
       this.arrayItinerario = listaitinerarios;
       console.log(this.arrayItinerario);
     })
@@ -128,13 +129,12 @@ export class CreoItinerarioComponent implements OnInit {
       nombreHotel: this.itinerarioForms.get('nombreHotel')?.value,
       precioNoche: this.itinerarioForms.get('precioNoche')?.value,
       imagenHotel: this.itinerarioForms.get('imagenHotel')?.value,
-      plazas : this.itinerarioForms.get('plazas')?.value,
+      plazas: this.itinerarioForms.get('plazas')?.value,
 
     }
-    console.log(creoItinerario);
     this.itinerarioservice.creoItinerario(creoItinerario).subscribe((creoItinerario: any) => {
-      console.log(creoItinerario);
       this.getItinerarios();
+      this.toastVerde = "Itinerario creado correctamente";
       this.toast = true;
 
     })
@@ -145,14 +145,16 @@ export class CreoItinerarioComponent implements OnInit {
     let actividades: any = this.relacionForms.get('actividades')?.value
     let itinerario: any = this.relacionForms.get('itinerario')?.value
 
-    console.log(actividades)
     actividades.forEach((element: any) => {
       this.itinerarioservice.addActividad(itinerario, element).subscribe((addActividad: any) => {
         console.log(addActividad);
-        this.TextoToastAct ="Actividad agregada al itinerario";
+        this.TextoToastAct = "Actividad agregada al itinerario";
         this.toastAct = true;
         this.getItinerarios();
-      });
+      }, (error: any) => {
+        swal("Error", "Esta actividad ya esta asignada a este itinerario", "error")
+      }
+      );
     });
   }
 
@@ -163,33 +165,63 @@ export class CreoItinerarioComponent implements OnInit {
   }
 
   suboImagen() {
+    this.toast = false
     console.log('envio' + this.archivo + this.archivo.name);
     this.imagenservice.postImagen(this.archivo, this.archivo.name);
-
+    this.toastVerde = "Imagen subida correctamente"
+    this.toast = true;
 
   }
 
   addImageItinerario() {
+    this.toast = false
     let imagen: any = this.relacionImagenForms.get('imagen')?.value
-    let itinerario: any = this.relacionImagenForms.get('itinerarioI')?.value
-    this.itinerarioservice.addImagen(itinerario, imagen).subscribe((addImagen: any) => {
-      console.log(addImagen);
-      this.getItinerarios();
+    console.log('imagen' + imagen)
+    let itinerarioid: any = this.relacionImagenForms.get('itinerarioI')?.value
+    let okey: any
+    let arrayIti: any = []
+    let arrayIti2: any = []
+
+    this.itinerarioservice.itinerarios().subscribe((listaitinerarios: any) => {
+      for (let itinerario of listaitinerarios) {
+
+        if (itinerario.imagen != null) {   //array de itinerarios con imagenes asignadas
+          arrayIti2.push(itinerario)
+
+        }
+      }
+      console.log(arrayIti2)
+      for (let itinerario of arrayIti2) {
+
+        if (itinerario.imagen.imagenId == imagen) {//añado a un array los itinerarios que tengas la imagen elegida en el select
+          arrayIti.push(itinerario)
+        }
+      }
+      console.log(arrayIti)
+      if (arrayIti.length > 0) {
+        swal("Error", "Esta imagen ya esta asignada a otro itinerario", "error")
+      } else {
+        this.itinerarioservice.addImagen(itinerarioid, imagen).subscribe((addImagen: any) => {
+          console.log(addImagen);
+          this.toastVerde = "Imagen asignada al itinerario correctamente"
+          this.toast = true;
+          this.getItinerarios();
+        })
+      }
     })
+
   }
-
-
 
   eliminoItinerario(itinerarioId: any) {
-    
+    this.toast = false;
     this.itinerarioservice.eliminoItinerario(itinerarioId).subscribe((eliminoItinerario: any) => {
       console.log(eliminoItinerario);
-      
+      this.toastVerde = "Itinerario eliminado correctamente"
+      this.toast = true;
+
       this.getItinerarios();
     })
   }
-
-
   window() {
     location.reload()
   }
@@ -199,6 +231,7 @@ export class CreoItinerarioComponent implements OnInit {
   abroModal(itinerarioId: any) {
     this.modalEditoItinerario.show();
     this.posteditoItinerario(itinerarioId);
+    this.itinerarioEditoId = itinerarioId;
   }
 
   abroModalIti(itinerarioId: any) {
@@ -215,19 +248,16 @@ export class CreoItinerarioComponent implements OnInit {
     this.modalEliminoActividad.show();
     this.eliminoActividad_actId = actividadId;
     this.eliminoActividad_itiId = itinerarioId;
-    
   }
 
   cierroModal() {
     this.modalEditoItinerario.hide();
-
   }
 
   // MODALES ################################################## MODALES ####################################################### MODALES
 
 
   posteditoItinerario(itinerarioId: any) {
-
     this.itinerarioservice.unItinerario(itinerarioId).subscribe((itinerarioObj: any) => {
       this.itinerarioEditForms.patchValue({
         itinerarioId: itinerarioObj.itinerarioId,
@@ -235,48 +265,44 @@ export class CreoItinerarioComponent implements OnInit {
         cordenadasHotel: itinerarioObj.cordenadasHotel,
         nombreHotel: itinerarioObj.nombreHotel,
         precioNoche: itinerarioObj.precioNoche,
+        plazas: itinerarioObj.plazas,
       })
     })
-
   }
 
   editoItinerario() {
-    let itinerarioId = this.itinerarioEditForms.get('itinerarioId')?.value
-    console.log('id edito ' + itinerarioId);
+    this.toast = false
     const editoItinerario: any = {
+
       ciudad: this.itinerarioEditForms.get('ciudad')?.value,
       cordenadasHotel: this.itinerarioEditForms.get('cordenadasHotel')?.value,
       nombreHotel: this.itinerarioEditForms.get('nombreHotel')?.value,
       precioNoche: this.itinerarioEditForms.get('precioNoche')?.value,
+      plazas: this.itinerarioEditForms.get('plazas')?.value,
     }
-    this.itinerarioservice.editoItinerario(itinerarioId, editoItinerario).subscribe((editoItinerario: any) => {
-
+    this.itinerarioservice.editoItinerario(this.itinerarioEditoId, editoItinerario).subscribe((data: any) => {
+      this.toastVerde = "Itinerario editado correctamente"
+      this.toast = true;
       this.getItinerarios();
     });
-
   }
 
   eliminoActividad(EliminoActividadId: any, EliminoActividadItinerarioId: any) {
     this.toastAct = false;
     let actividadId = EliminoActividadId;
     let itinerarioId = EliminoActividadItinerarioId;
-
-    console.log('id actividad ' + actividadId + ' id itinerario ' + itinerarioId);
-
     this.itinerarioservice.removeActividad(itinerarioId, actividadId).subscribe((eliminoActividad: any) => {
-      this.TextoToastAct ="Actividad eliminada del itinerario";
-        this.toastAct = true;
+      this.TextoToastAct = "Actividad eliminada del itinerario";
+      this.toastAct = true;
       this.getItinerarios();
     });
-
-
   }
-
   eliminoImagen(itinerarioId: any) {
     this.itinerarioservice.removeImagen(itinerarioId).subscribe((eliminoImagen: any) => {
+      this.toastVerde = "Imagen eliminada del itinerario correctamente"
+      this.toast = true;
       this.getItinerarios();
     });
   }
-
 
 }

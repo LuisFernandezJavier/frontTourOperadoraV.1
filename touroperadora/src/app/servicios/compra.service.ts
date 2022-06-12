@@ -22,4 +22,5 @@ export class CompraService {
     addActividad(itinerarioId: any, actividadId: any): Observable<any> {
         return this.http.post(this.url + 'itinerarioCompra/addActividad/' + actividadId + '/al/' + itinerarioId , null)
     }
+    
 }

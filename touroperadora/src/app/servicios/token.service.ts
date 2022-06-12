@@ -7,7 +7,7 @@ const TOKEN_KEY = 'AuthToken';
 
 const USER_KEY = 'AuthUser';
 
-const AUTHORITIES_KEY = 'AuthAuthorities' ;
+const AUTHORITIES_KEY = 'AuthAuthorities';
 @Injectable({
     providedIn: 'root'
 })
@@ -32,12 +32,12 @@ export class TokenService {
         window.sessionStorage.setItem(USER_KEY, userName);
     }
 
-    public getUser(): string  {
+    public getUser(): string {
         return sessionStorage.getItem(USER_KEY)!;
     }
 
     // AUTHORITIES
-    public getAuthorities(): string[]  {
+    public getAuthorities(): string[] {
         this.roles = [];
         if (sessionStorage.getItem(AUTHORITIES_KEY)) {
             JSON.parse(sessionStorage.getItem(AUTHORITIES_KEY)!).forEach((authority: { authority: string; }) => {
@@ -54,10 +54,10 @@ export class TokenService {
         }
 
     }
-// ELIMINO TODO
+    // ELIMINO TODO
     public logout(): void {
         window.sessionStorage.clear();
-        
+
 
     }
 }

@@ -3,15 +3,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NuevoUsuario } from 'src/app/modelos/nuevoUsuario';
 import { AuthService } from 'src/app/servicios/auth.service';
+import { TokenService } from 'src/app/servicios/token.service';
 @Component({
   selector: 'app-creo-usuario',
   templateUrl: './creo-usuario.component.html',
   styleUrls: ['./creo-usuario.component.css']
 })
 export class CreoUsuarioComponent implements OnInit {
-  
+
   registroForms: FormGroup;
-  errorPass  = false ;
+  errorPass = false;
   constructor(
     private vb: FormBuilder,
     private router: Router,
@@ -34,23 +35,22 @@ export class CreoUsuarioComponent implements OnInit {
     this.errorPass = false;
     if (this.registroForms.value.passUsuario === this.registroForms.value.passUsuario2) {
 
-      const nuevoUsuario  = {
-        nombreUsuario : this.registroForms.get('nombreUsuario')?.value,
+      const nuevoUsuario = {
+        nombreUsuario: this.registroForms.get('nombreUsuario')?.value,
         passUsuario: this.registroForms.get('passUsuario')?.value,
         emailUsuario: this.registroForms.get('emailUsuario')?.value,
-        authorities : []
-      } 
-    let usuario = new NuevoUsuario(nuevoUsuario.nombreUsuario,  nuevoUsuario.emailUsuario,nuevoUsuario.passUsuario, nuevoUsuario.authorities);
-    console.log(usuario)
-      this.authservice.nuevoUsuario (usuario).subscribe((response :any) =>{
+        authorities: []
+      }
+      let usuario = new NuevoUsuario(nuevoUsuario.nombreUsuario, nuevoUsuario.emailUsuario, nuevoUsuario.passUsuario, nuevoUsuario.authorities);
+      console.log(usuario)
+      this.authservice.nuevoUsuario(usuario).subscribe((response: any) => {
 
-        
         this.router.navigateByUrl('/');
 
-      } , (error :any) =>{
+      }, (error: any) => {
         console.log(error.error)
-        swal ("Error" ,`${error.error.mensaje}` , "error")
-        
+        swal("Error", `${error.error.mensaje}`, "error")
+
       })
     } else {
       this.errorPass = true;

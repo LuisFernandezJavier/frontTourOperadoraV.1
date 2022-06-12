@@ -19,17 +19,17 @@
                     <input type="password" class=" form-control " style="margin-bottom: 3%; "
                         formControlName="passUsuario" placeholder=" Contraseña ">
 
-                        <input type="password" class=" form-control " style="margin-bottom: 3%; "
+                    <input type="password" class=" form-control " style="margin-bottom: 3%; "
                         formControlName="passUsuario2" placeholder=" Repite la contraseña ">
 
-                    
+
 
                     <div class="alert alert-danger mb-2" *ngIf="errorPass">
-                        <span class="error"> Contraseñas no  <strong>coinciden</strong> !! </span>
+                        <span class="error"> Contraseñas no <strong>coinciden</strong> !! </span>
                     </div>
 
-                    <button type="submit " class="btn btn-warning float-start"
-                                    data-bs-dismiss="modal"   [routerLink]="['']">Cancelar</button>
+                    <button type="submit " class="btn btn-warning float-start" data-bs-dismiss="modal"
+                        [routerLink]="['']">Cancelar</button>
 
                     <button type="submit " class="btn btn-warning " style="display: block; margin-left: auto; "
                         [disabled]="registroForms.invalid " (click)="registroUsuario()">Guardar</button>

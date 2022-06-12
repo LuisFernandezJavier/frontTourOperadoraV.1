@@ -1,8 +1,10 @@
-div.container-fluid{
+div.container-fluid {
     background-color: #f9efdc !important;
+    min-height: 800px;
 }
-table{
+
+table {
     background-color: #ffffff;
     border-radius: 5px !important;
-    
+
 }

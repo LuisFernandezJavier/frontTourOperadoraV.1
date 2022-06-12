@@ -42,6 +42,11 @@
                             <input type="text" class="form-control form-control-sm text-color"
                                 formControlName="precioNoche" placeholder="Precio por Noche">
                         </div>
+                        <div class="col-auto mt-3">
+                            <label><b>Plazas disponibles</b></label>
+                            <input type="text" class="form-control form-control-sm text-color" formControlName="plazas"
+                                placeholder="Plazas disponibles">
+                        </div>
 
 
                     </form>
@@ -189,16 +194,17 @@
     </div>
     <!-- Modal eliminar Imagen -->
 
-
-    <!-- toast de crear itinerario -->
+    <!-- toast de verde -->
     <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 10px; z-index: 1;" *ngIf="toast">
 
         <div style="position: absolute; top: 0; right: 0;">
             <ngb-toast class="bg-success text-light mt-3" header="CanaryTrip" [delay]="5000">
-                Itinerario creado
+                {{toastVerde}}
             </ngb-toast>
         </div>
     </div>
+
+
 
     <!-- toast de relacionar actividad -->
 
@@ -242,8 +248,8 @@
                         </div>
                         <div class="col-auto mt-3">
                             <label><b>Plazas disponibles</b></label>
-                            <input type="text" class="form-control form-control-sm text-color"
-                                formControlName="plazas" placeholder="Plazas disponibles">
+                            <input type="text" class="form-control form-control-sm text-color" formControlName="plazas"
+                                placeholder="Plazas disponibles">
                         </div>
 
                         <button class="btn btn-success float-end mt-2" (click)="agregoItinerario()"
@@ -349,16 +355,18 @@
                         <th scope="col">Ciudad</th>
                         <th scope="col">Nombre del Hotel</th>
                         <th scope="col">Precio Noche</th>
+                        <th scope="col">Plazas</th>
                         <th scope="col">Imagen </th>
                         <th scope="col">Actividades</th>
                         <th scope="col">Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let itinerario of arrayItinerario">
+                    <tr *ngFor="let itinerario of arrayItinerario | paginate:page_size:page_number">
                         <td>{{itinerario.ciudad}}</td>
                         <td>{{itinerario.nombreHotel}}</td>
                         <td>{{itinerario.precioNoche}}€</td>
+                        <td>{{itinerario.plazas}}</td>
                         <td>{{itinerario.imagen?.nombreImagen || ' No hay imagen '}} <button *ngIf="itinerario.imagen"
                                 class="btn p-0" (click)="abroModalImg(itinerario.itinerarioId)">
                                 <fa-icon [icon]="fasquarexmark"></fa-icon>
@@ -386,8 +394,12 @@
                         </td>
                     </tr>
 
+
                 </tbody>
             </table>
+            <mat-paginator [length]="arrayItinerario.length" [pageSize]="page_size" [pageSizeOptions]="pageSizeOptions"
+                aria-label="Select page" (page)="handlePage($event)">
+            </mat-paginator>
         </div>
 
     </div>

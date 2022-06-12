@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PageEvent } from '@angular/material/paginator';
 import { faBars, faTrashCan, faPenToSquare, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { ActividadService } from 'src/app/servicios/actividad.service';
 import { ItinerarioService } from 'src/app/servicios/itinerario.service';
@@ -11,6 +12,10 @@ declare var window: any;
   styleUrls: ['./creo-actividad.component.css']
 })
 export class CreoActividadComponent implements OnInit {
+
+  page_size: number = 5;
+  page_number: number = 1;
+  pageSizeOptions = [1, 5, 10, 25, 50];
 
   //iconos
   fabars = faBars;
@@ -58,6 +63,10 @@ export class CreoActividadComponent implements OnInit {
     this.getActividades();
   }
 
+  handlePage(e: PageEvent) {
+    this.page_number = e.pageIndex + 1;
+    this.page_size = e.pageSize;
+  }
 
   getActividades() {
     this.actividadservice.actividades().subscribe((listaactividades: any) => {
@@ -77,10 +86,12 @@ export class CreoActividadComponent implements OnInit {
     console.log(creoActividad);
     this.actividadservice.creoActividad(creoActividad).subscribe((creoActividad: any) => {
       console.log(creoActividad);
-      this.TextoToastVerde="Se agrego la actividad correctamente";
+      this.TextoToastVerde = "Se agrego la actividad correctamente";
       this.toastVerde = true;
-      
+
       this.getActividades();
+    }, (error) => {
+      swal("Error", `${error.error.mensaje}`, "error")
     })
   }
 
@@ -91,7 +102,7 @@ export class CreoActividadComponent implements OnInit {
     this.itinerarioservice.itinerarios().subscribe((listaitinerarios: any) => {
 
       for (let itinerario of listaitinerarios) {
-        
+
         for (let actividades of itinerario.actividades) {
           if (actividades.actividadId == id) {
             this.toastEliminar = true;
@@ -104,15 +115,13 @@ export class CreoActividadComponent implements OnInit {
       }
       if (post == false) {
         this.actividadservice.eliminoActividad(id).subscribe((eliminoActividad: any) => {
-          this.TextoToastVerde="Se eliminó la actividad correctamente";
+          this.TextoToastVerde = "Se eliminó la actividad correctamente";
           this.toastVerde = true;
           this.getActividades();
 
         });
       }
     });
-
-
 
   }
 
@@ -138,24 +147,25 @@ export class CreoActividadComponent implements OnInit {
     this.actividadservice.una_actividad(actividadId).subscribe((actividadObj: any) => {
       this.actividadEditForms.patchValue({
         //actividadId: actividadObj.actividadId,
-        nombreActividad : actividadObj.nombreActividad,
-        precioActividad : actividadObj.precioActividad,
+        nombreActividad: actividadObj.nombreActividad,
+        precioActividad: actividadObj.precioActividad,
         descripcionActividad: actividadObj.descripcionActividad
       })
-      
+
     })
 
   }
 
-  editoItinerario() {
+  editoActividad() {
     //let actividadId = this.actividadEditForms.get('actividadId')?.value
     //console.log('id edito ' + actividadId);
     const editoActividad: any = {
       nombreActividad: this.actividadEditForms.get('nombreActividad')?.value,
       precioActividad: this.actividadEditForms.get('precioActividad')?.value,
       descripcionActividad: this.actividadEditForms.get('descripcionActividad')?.value,
-      
+
     }
+    console.log(editoActividad)
     this.actividadservice.editoActividad(this.editoActividad_actId, editoActividad).subscribe((editoItinerario: any) => {
 
       this.getActividades();

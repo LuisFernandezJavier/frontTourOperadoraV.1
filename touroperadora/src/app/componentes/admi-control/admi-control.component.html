@@ -1,0 +1,54 @@
+<app-header></app-header> <!-- Header -->
+<div class="container-fluid ">
+    <div class="row justify-content-center mb-5">
+        <h1 class="page-header text-center mt-5"><b>PANEL DE CONTROL</b></h1>
+        <div class="col-sm-3   mt-5">
+            <div class="card p-3" [routerLink]="['/creo-itinerario']" style="cursor: pointer">
+                <div class="row justify-content-center d-flex ">
+                    <div class="col-6 p-3 justify-content-center">
+                        <img src=" ../..//src/assets/img/hoja-del-papel-rasgado-descargar-iconos-gratis-116645.png"
+                            class="" height="150" width="100">
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h4 class="text-center"><b>ITINERARIOS</b> </h4>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-3  mt-5">
+            <div class="card p-3" [routerLink]="['/creo-actividad']" style="cursor: pointer">
+                <div class="row justify-content-center">
+                    <div class="col-6 p-3 ">
+                        <img src="../..//src/assets/img/acciones.png" class="centro" height="150" width="100">
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h4 class="text-center"><b>ACTIVIDADES</b></h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3  mt-5">
+            <div class="card p-3" [routerLink]="['/usuariosPanel']" style="cursor: pointer">
+                <div class="row justify-content-center">
+                    <div class="col-6 p-3">
+                        <img src="../..//src/assets/img/usuario-hombre-verificado-icon-866012.png" class="" height="150"
+                            width="100">
+                    </div>
+                </div>
+                <div class="card-body ">
+                    <h4 class="text-center"><b>USUARIOS</b></h4>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-sm-10 mb-5 sombra" id="miGrafico01">
+            <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions" class="focus"></highcharts-chart>
+        </div>
+    </div>
+</div>
+<app-footer class="p-0"></app-footer>
